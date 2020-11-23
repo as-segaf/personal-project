@@ -14,7 +14,10 @@ class CreateUserChannelsTable extends Migration
     public function up()
     {
         Schema::create('user_channels', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->uuid('user_id');
+            $table->uuid('channel_id');
+
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('channel_id')->references('id')->on('channels')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

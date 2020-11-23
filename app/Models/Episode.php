@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Episodes extends Model
+class Episode extends Model
 {
-    use HasFactory;
+    use HasFactory,UsesUuid;
 
     /**
      * The attributes that are mass assignable.
@@ -20,4 +21,12 @@ class Episodes extends Model
         'podcast',
         'cover_image',
     ];
+
+    /**
+     * Relation Episode to channelEpisode
+     */
+    public function channelEpisode()
+    {
+        return $this->hasOne(ChannelEpisode::class, 'channelEpisode_id');
+    }
 }

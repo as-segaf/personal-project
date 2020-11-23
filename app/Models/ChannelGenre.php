@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ChannelGenre extends Model
 {
-    use HasFactory;
+    use HasFactory,UsesUuid;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +25,7 @@ class ChannelGenre extends Model
      */
     public function channel()
     {
-        //
+        return $this->belongsToMany(Channel::class, 'channel_id');
     }
 
     /**
@@ -32,6 +33,6 @@ class ChannelGenre extends Model
      */
     public function genre()
     {
-        //
+        return $this->belongsToMany(Genre::class, 'genre_id');
     }
 }

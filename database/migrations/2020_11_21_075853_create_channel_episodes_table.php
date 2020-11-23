@@ -14,7 +14,10 @@ class CreateChannelEpisodesTable extends Migration
     public function up()
     {
         Schema::create('channel_episodes', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->uuid('channel_id');
+            $table->uuid('episode_id');
+
             $table->foreign('channel_id')->references('id')->on('channels')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('episode_id')->references('id')->on('episodes')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

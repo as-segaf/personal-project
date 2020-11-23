@@ -14,7 +14,10 @@ class CreateChannelGenresTable extends Migration
     public function up()
     {
         Schema::create('channel_genres', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->uuid('channel_id');
+            $table->uuid('genre_id');
+
             $table->foreign('channel_id')->references('id')->on('channels')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('genre_id')->references('id')->on('genres')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

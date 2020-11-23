@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\UsesUuid;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable,UsesUuid;
 
     /**
      * The attributes that are mass assignable.
@@ -43,10 +44,38 @@ class User extends Authenticatable
     ];
 
     /**
+     * Get the value indicating whether the IDs are incrementing.
+     *
+     * @return bool
+     */
+    public function getIncrementing()
+    {
+        return false;
+    }
+
+    /**
+     * Get the auto-incrementing key type.
+     *
+     * @return string
+     */
+    public function getKeyType()
+    {
+        return 'string';
+    }
+
+    /**
      * Relation user to channel
      */
-    public function channels()
+    public function userChannels()
     {
-        return $this->hasMany(Models\Channel::class, 'channel_id');
+        return $this->hasMany(UserChannel::class);
+    }
+
+    /**
+     * Relation user to subcription
+     */
+    public function subcriptions()
+    {
+        return $this->hasMany(Subcription::class);
     }
 }
