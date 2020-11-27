@@ -15,8 +15,8 @@ class CreateSubcriptionsTable extends Migration
     {
         Schema::create('subcriptions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('user_id')->nullable(false);
-            $table->uuid('channel_id')->nullable(false);
+            $table->uuid('user_id');
+            $table->uuid('channel_id');
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('channel_id')->references('id')->on('channels')->onUpdate('cascade')->onDelete('cascade');
