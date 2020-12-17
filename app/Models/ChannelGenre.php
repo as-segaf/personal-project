@@ -25,7 +25,7 @@ class ChannelGenre extends Model
      */
     public function channel()
     {
-        return $this->belongsToMany(Channel::class, 'channel_id');
+        return $this->belongsTo(Channel::class, 'channel_id');
     }
 
     /**
@@ -33,6 +33,6 @@ class ChannelGenre extends Model
      */
     public function genre()
     {
-        return $this->belongsToMany(Genre::class, 'genre_id');
+        return $this->belongs(Genre::class, 'genre_id');
     }
 }

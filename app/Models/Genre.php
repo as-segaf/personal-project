@@ -22,8 +22,8 @@ class Genre extends Model
     /**
      * Relation genre to channelGenre
      */
-    public function channelGenres()
+    public function channelGenre()
     {
-        return $this->hasMany(ChannelGenre::class);
+        return $this->hasMany(ChannelGenre::class, 'genre_id');
     }
 }

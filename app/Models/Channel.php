@@ -33,7 +33,7 @@ class Channel extends Model
      */
     public function channelGenres()
     {
-        return $this->hasMany(ChannelGenre::class);
+        return $this->hasMany(ChannelGenre::class, 'channel_id');
     }
 
     /**
