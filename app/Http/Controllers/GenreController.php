@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Genre;
+use App\Repositories\GenreRepositoryInterface;
 use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
+    private $genreRepository;
+
+    public function __construct(GenreRepositoryInterface $genreRepository) {
+        $this->genreRepository = $genreRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,11 @@ class GenreController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'code' => 200,
+            'status' => 'ok',
+            'data' => $this->genreRepository->all(),
+        ],200);
     }
 
     /**
@@ -46,7 +57,11 @@ class GenreController extends Controller
      */
     public function show(Genre $genre)
     {
-        //
+        return response()->json([
+            'code' => 200,
+            'status' => 'ok',
+            'data' => $this->genreRepository->findById($genre),
+        ],200);
     }
 
     /**
